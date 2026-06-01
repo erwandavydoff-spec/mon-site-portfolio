@@ -662,6 +662,177 @@
       .tl-right { align-items: flex-start; }
       footer .footer-mid { display: none; }
     }
+
+    /* ═══════════════════════════════════════
+       MUSIC PLAYER
+    ═══════════════════════════════════════ */
+    #music-player {
+      position: fixed; bottom: 24px; right: 24px; z-index: 600;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(0,232,122,.06);
+      backdrop-filter: blur(20px);
+      transition: all .3s ease;
+      min-width: 220px;
+    }
+    #music-player:hover { border-color: var(--green-20); box-shadow: 0 8px 40px rgba(0,0,0,.6), 0 0 20px rgba(0,232,122,.06); }
+
+    .mp-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--green-08); border: 1px solid var(--green-20);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .mp-bars {
+      display: flex; align-items: flex-end; gap: 2px; height: 14px;
+    }
+    .mp-bar {
+      width: 3px; background: var(--green); border-radius: 2px;
+      animation: bar-dance 1.2s ease-in-out infinite;
+    }
+    .mp-bar:nth-child(1) { animation-delay: 0s; }
+    .mp-bar:nth-child(2) { animation-delay: .2s; }
+    .mp-bar:nth-child(3) { animation-delay: .4s; }
+    .mp-bar:nth-child(4) { animation-delay: .1s; }
+    @keyframes bar-dance {
+      0%,100% { height: 4px; opacity: .5; }
+      50% { height: 14px; opacity: 1; }
+    }
+    .mp-bars.paused .mp-bar { animation-play-state: paused; height: 4px; opacity: .4; }
+
+    .mp-info { flex: 1; min-width: 0; }
+    .mp-title {
+      font-family: var(--mono); font-size: 10.5px; color: var(--snow);
+      letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .mp-sub {
+      font-family: var(--mono); font-size: 9.5px; color: var(--fog);
+      letter-spacing: .06em; margin-top: 2px;
+    }
+
+    .mp-controls { display: flex; align-items: center; gap: 6px; }
+    .mp-btn {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: var(--bg-3); border: 1px solid var(--border-2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .2s; color: var(--slate); font-size: 11px;
+    }
+    .mp-btn:hover { background: var(--green-08); border-color: var(--green-20); color: var(--green); }
+    .mp-btn.active { background: var(--green-08); border-color: var(--green-20); color: var(--green); }
+
+    .mp-vol {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 10px; color: var(--fog);
+    }
+    .mp-vol-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 52px; height: 3px;
+      background: var(--border-2); border-radius: 2px; outline: none;
+      cursor: pointer;
+    }
+    .mp-vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 10px; height: 10px;
+      background: var(--green); border-radius: 50%;
+    }
+
+    /* ═══════════════════════════════════════
+       CONTACT FORM SECTION
+    ═══════════════════════════════════════ */
+    #contact-form-section {
+      background: var(--bg);
+    }
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
+    }
+    .form-intro h2 { margin-bottom: 1rem; }
+    .form-intro p {
+      font-size: 14.5px; color: var(--slate); line-height: 1.85; margin-bottom: 1.6rem;
+    }
+    .form-hint {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: var(--green-08); border: 1px solid var(--green-20);
+      border-radius: 6px; padding: 12px 14px;
+      font-family: var(--mono); font-size: 10.5px; color: var(--green);
+      line-height: 1.6;
+    }
+    .form-hint-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+    /* The form itself */
+    .contact-form {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .form-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; background: var(--bg-2); border-bottom: 1px solid var(--border);
+    }
+    .form-header-dots { display: flex; gap: 5px; }
+    .form-header-dots span { width: 9px; height: 9px; border-radius: 50%; }
+    .fh-label { font-family: var(--mono); font-size: 10.5px; color: var(--fog); margin-left: 4px; }
+
+    .form-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-family: var(--mono); font-size: 10px; color: var(--fog);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .form-input, .form-textarea, .form-select {
+      background: var(--bg-2); border: 1px solid var(--border-2);
+      border-radius: 6px; padding: 10px 14px;
+      font-family: var(--mono); font-size: 12.5px; color: var(--snow);
+      outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--fog); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--green-20);
+      box-shadow: 0 0 0 3px rgba(0,232,122,.06);
+    }
+    .form-select { cursor: pointer; color: var(--slate); }
+    .form-select option { background: var(--bg-2); }
+    .form-textarea { min-height: 130px; }
+
+    .form-char-count {
+      font-family: var(--mono); font-size: 9px; color: var(--fog);
+      text-align: right; margin-top: -4px;
+    }
+    .form-char-count.warn { color: var(--amber); }
+
+    .form-submit-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding-top: 4px;
+    }
+    .form-status {
+      font-family: var(--mono); font-size: 10.5px; color: var(--fog);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .form-status.success { color: var(--green); }
+    .form-status.error { color: var(--red); }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    .btn-submit {
+      font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+      letter-spacing: .06em; color: var(--bg);
+      background: var(--green); border: 1px solid var(--green);
+      padding: 10px 22px; border-radius: 6px;
+      cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-submit:hover { background: transparent; color: var(--green); }
+    .btn-submit:active { transform: scale(.97); }
+    .btn-submit.sending { opacity: .6; pointer-events: none; }
+
+    @media (max-width: 900px) {
+      .form-grid { grid-template-columns: 1fr; gap: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -679,6 +850,7 @@
     <li><a href="#projects">Projets</a></li>
     <li><a href="#experience">Parcours</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact-form-section">✉ Message</a></li>
   </ul>
   <a href="CV_Professionnel_Simple_Beige_et_Noir-2.pdf" download class="nav-cta">↓ CV</a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span></button>
@@ -694,6 +866,35 @@
     <li><a href="CV_Professionnel_Simple_Beige_et_Noir-2.pdf" download>↓ Télécharger le CV</a></li>
   </ul>
 </div>
+
+<!-- ══ MUSIC PLAYER ══ -->
+<div id="music-player">
+  <div class="mp-icon">
+    <div class="mp-bars paused" id="mp-bars">
+      <div class="mp-bar"></div>
+      <div class="mp-bar"></div>
+      <div class="mp-bar"></div>
+      <div class="mp-bar"></div>
+    </div>
+  </div>
+  <div class="mp-info">
+    <div class="mp-title" id="mp-title">Cyberpunk Ambient</div>
+    <div class="mp-sub">♪ Musique de fond</div>
+  </div>
+  <div class="mp-controls">
+    <div class="mp-vol">
+      <span>🔈</span>
+      <input type="range" class="mp-vol-slider" id="mp-vol" min="0" max="1" step="0.01" value="0.3">
+    </div>
+    <button class="mp-btn" id="mp-play" title="Lecture / Pause">▶</button>
+  </div>
+</div>
+
+<!-- ══ AUDIO ELEMENT ══ -->
+<audio id="bg-audio" loop>
+  <!-- Musique libre de droits depuis Pixabay / ccMixter -->
+  <source src="https://cdn.pixabay.com/audio/2024/02/15/audio_d6e4b8ba36.mp3" type="audio/mpeg">
+</audio>
 
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section id="hero">
@@ -1461,6 +1662,71 @@
   </div>
 </section>
 
+<!-- ══════════════════════ FORMULAIRE DE CONTACT ══════════════════════ -->
+<section id="contact-form-section" class="section reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="label-num">07</span><span class="label-slash">//</span><span>Envoyer un message</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-intro">
+        <h2 class="section-title">Écrivez-moi<br><em>directement.</em></h2>
+        <p>Vous pouvez m'envoyer un message directement depuis cette page. Je réponds sous <strong>24h</strong> — pour une offre de stage, une question technique ou simplement pour échanger.</p>
+        <div class="form-hint">
+          <span class="form-hint-icon">⚡</span>
+          <span>Le formulaire ouvre votre client mail avec le message pré-rempli. Aucune donnée n'est stockée côté serveur.</span>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-header">
+          <div class="form-header-dots">
+            <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+          </div>
+          <span class="fh-label">nouveau_message.sh</span>
+        </div>
+        <div class="form-body">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="f-name">Votre nom</label>
+              <input class="form-input" id="f-name" type="text" placeholder="Jean Dupont" autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="f-email">Votre email</label>
+              <input class="form-input" id="f-email" type="email" placeholder="jean@entreprise.fr" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-subject">Objet</label>
+            <select class="form-select" id="f-subject">
+              <option value="">— Choisir un objet —</option>
+              <option value="Proposition de stage — Cybersécurité">🎯 Proposition de stage — Cybersécurité</option>
+              <option value="Proposition de stage — Réseaux / Admin sys">🌐 Proposition de stage — Réseaux / Admin sys</option>
+              <option value="Question technique">💡 Question technique</option>
+              <option value="Collaboration / Projet">🤝 Collaboration / Projet</option>
+              <option value="Autre">✉ Autre</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-message">Message</label>
+            <textarea class="form-textarea" id="f-message" placeholder="Bonjour Erwan, je vous contacte pour...&#10;&#10;Décrivez votre demande ici..." maxlength="1200"></textarea>
+            <div class="form-char-count" id="f-char">0 / 1200 caractères</div>
+          </div>
+          <div class="form-submit-row">
+            <div class="form-status" id="f-status">
+              <span class="status-dot"></span>
+              <span id="f-status-text">Prêt à envoyer</span>
+            </div>
+            <button class="btn-submit" id="f-submit" type="button">
+              <span>Envoyer →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-inner">
     <span class="footer-brand"><span class="brand-slash">//</span> Erwan Davydoff</span>
@@ -1633,6 +1899,134 @@ document.querySelectorAll('.logo-pill').forEach(card => {
     card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
   });
 });
+
+/* ═══════════════════════════════════════
+   MUSIC PLAYER
+═══════════════════════════════════════ */
+(function() {
+  const audio   = document.getElementById('bg-audio');
+  const playBtn = document.getElementById('mp-play');
+  const bars    = document.getElementById('mp-bars');
+  const volSlider = document.getElementById('mp-vol');
+  const titleEl = document.getElementById('mp-title');
+
+  const tracks = [
+    { src: 'https://cdn.pixabay.com/audio/2024/02/15/audio_d6e4b8ba36.mp3', name: 'Cyberpunk Ambient' },
+    { src: 'https://cdn.pixabay.com/audio/2023/10/09/audio_aeab93cff2.mp3', name: 'Dark Lo-Fi Beat' },
+    { src: 'https://cdn.pixabay.com/audio/2022/08/04/audio_2dde668d05.mp3', name: 'Hacker Synthwave' },
+  ];
+  let trackIdx = 0;
+  let playing = false;
+
+  audio.volume = parseFloat(volSlider.value);
+  audio.src = tracks[trackIdx].src;
+
+  function setPlaying(state) {
+    playing = state;
+    playBtn.textContent = state ? '⏸' : '▶';
+    playBtn.classList.toggle('active', state);
+    bars.classList.toggle('paused', !state);
+  }
+
+  playBtn.addEventListener('click', () => {
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio.play().then(() => setPlaying(true)).catch(() => {
+        // autoplay blocked, show hint
+        titleEl.textContent = 'Cliquez ▶ pour la musique';
+      });
+    }
+  });
+
+  volSlider.addEventListener('input', () => {
+    audio.volume = parseFloat(volSlider.value);
+  });
+
+  audio.addEventListener('ended', () => {
+    trackIdx = (trackIdx + 1) % tracks.length;
+    audio.src = tracks[trackIdx].src;
+    titleEl.textContent = tracks[trackIdx].name;
+    audio.play().catch(() => {});
+  });
+
+  audio.addEventListener('error', () => {
+    trackIdx = (trackIdx + 1) % tracks.length;
+    audio.src = tracks[trackIdx].src;
+    titleEl.textContent = tracks[trackIdx].name;
+    if (playing) audio.play().catch(() => {});
+  });
+})();
+
+/* ═══════════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════════ */
+(function() {
+  const nameEl    = document.getElementById('f-name');
+  const emailEl   = document.getElementById('f-email');
+  const subjectEl = document.getElementById('f-subject');
+  const msgEl     = document.getElementById('f-message');
+  const charEl    = document.getElementById('f-char');
+  const statusEl  = document.getElementById('f-status');
+  const statusTxt = document.getElementById('f-status-text');
+  const submitBtn = document.getElementById('f-submit');
+
+  if (!msgEl) return;
+
+  msgEl.addEventListener('input', () => {
+    const len = msgEl.value.length;
+    charEl.textContent = len + ' / 1200 caractères';
+    charEl.classList.toggle('warn', len > 1000);
+  });
+
+  function setStatus(type, text) {
+    statusEl.className = 'form-status ' + type;
+    statusTxt.textContent = text;
+  }
+
+  submitBtn.addEventListener('click', () => {
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+    const subject = subjectEl.value || 'Message depuis le portfolio';
+    const message = msgEl.value.trim();
+
+    if (!name) { setStatus('error', 'Veuillez entrer votre nom'); nameEl.focus(); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('error', 'Email invalide'); emailEl.focus(); return; }
+    if (!message) { setStatus('error', 'Le message est vide'); msgEl.focus(); return; }
+
+    submitBtn.classList.add('sending');
+    setStatus('', 'Ouverture du client mail...');
+
+    const body = encodeURIComponent(
+      'Bonjour Erwan,\n\n' + message +
+      '\n\n---\nEnvoyé depuis le portfolio par ' + name +
+      '\nEmail de retour : ' + email
+    );
+    const mailto = `mailto:Erwan.davydoff@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    setTimeout(() => {
+      window.location.href = mailto;
+      setStatus('success', '✓ Client mail ouvert !');
+      submitBtn.classList.remove('sending');
+
+      // Reset form after delay
+      setTimeout(() => {
+        nameEl.value = '';
+        emailEl.value = '';
+        subjectEl.value = '';
+        msgEl.value = '';
+        charEl.textContent = '0 / 1200 caractères';
+        setStatus('', 'Prêt à envoyer');
+      }, 4000);
+    }, 600);
+  });
+
+  // Enter key in inputs
+  [nameEl, emailEl].forEach(el => {
+    el && el.addEventListener('keydown', e => { if (e.key === 'Enter') submitBtn.click(); });
+  });
+})();
 </script>
 </body>
 </html>
