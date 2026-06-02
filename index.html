@@ -618,6 +618,246 @@
       body { cursor: auto; }
       #cur-dot, #cur-ring { display: none; }
     }
+
+    /* ══════════════════════════════════
+       NOUVELLE TIMELINE FORMATIONS
+    ══════════════════════════════════ */
+    .new-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ntl-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 20px;
+      position: relative;
+    }
+
+    /* ASIDE — logo + ligne verticale */
+    .ntl-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .ntl-logo-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .ntl-logo-wrap:hover {
+      border-color: rgba(63,185,80,.4);
+      box-shadow: 0 0 0 3px rgba(63,185,80,.07);
+    }
+    .ntl-logo-wrap a {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ntl-logo-wrap img {
+      width: 28px; height: 28px;
+      object-fit: contain;
+    }
+    .ntl-logo-fallback {
+      font-size: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ntl-line-seg {
+      width: 1px;
+      flex: 1;
+      min-height: 24px;
+      background: linear-gradient(to bottom, var(--border-2), transparent);
+      margin-top: 8px;
+    }
+    .ntl-line-edu {
+      background: linear-gradient(to bottom, rgba(63,185,80,.3), transparent);
+    }
+    .ntl-line-last { opacity: 0; }
+
+    /* CARD */
+    .ntl-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      transition: border-color .2s, box-shadow .2s;
+      position: relative;
+    }
+    .ntl-card:hover {
+      border-color: var(--border-2);
+      box-shadow: 0 4px 24px rgba(0,0,0,.3);
+    }
+    .ntl-card.ntl-current {
+      border-color: rgba(63,185,80,.25);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(63,185,80,.04) 100%);
+    }
+    .ntl-card.ntl-current:hover {
+      border-color: rgba(63,185,80,.4);
+      box-shadow: 0 4px 24px rgba(63,185,80,.08);
+    }
+    .ntl-card.ntl-edu {
+      border-left: 2px solid var(--border-2);
+    }
+    .ntl-card.ntl-edu.ntl-current {
+      border-left-color: rgba(63,185,80,.5);
+    }
+
+    /* TOP ROW */
+    .ntl-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .ntl-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .ntl-badge-current {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(63,185,80,.3);
+      padding: 3px 10px; border-radius: 100px;
+      letter-spacing: .05em;
+    }
+    .ntl-pulse {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 1.8s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .ntl-badge-done {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: 9.5px;
+      color: var(--faint);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 100px;
+      letter-spacing: .05em;
+    }
+
+    .ntl-type {
+      font-family: var(--mono); font-size: 9.5px;
+      color: var(--faint); letter-spacing: .04em;
+    }
+
+    .ntl-period {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* COMPANY ROW */
+    .ntl-company-row { margin-bottom: 3px; }
+    .ntl-company-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: color .15s;
+    }
+    .ntl-company-link:hover .ntl-company { color: var(--green); }
+    .ntl-company-link:hover .ntl-ext-icon { opacity: 1; transform: translate(1px,-1px); }
+
+    .ntl-company {
+      font-size: 17px; font-weight: 700;
+      color: var(--text); letter-spacing: -.02em;
+      transition: color .15s;
+    }
+    .ntl-ext-icon {
+      font-size: 9px; color: var(--faint);
+      opacity: 0; transition: opacity .15s, transform .15s;
+      margin-top: 2px;
+    }
+
+    .ntl-role {
+      font-size: 12px; color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* MISSIONS */
+    .ntl-missions {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 7px;
+      margin-bottom: 16px;
+    }
+    .ntl-missions li {
+      font-size: 13px; color: var(--muted);
+      padding-left: 16px; position: relative;
+      line-height: 1.55;
+    }
+    .ntl-missions li::before {
+      content: '›';
+      position: absolute; left: 0;
+      color: var(--faint); font-size: 14px; line-height: 1.4;
+    }
+    .ntl-missions li strong { color: var(--text); font-weight: 600; }
+
+    /* TECH TAGS */
+    .ntl-tech {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .ntl-tech span {
+      font-family: var(--mono); font-size: 9.5px;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 3px;
+      background: var(--bg);
+      transition: color .15s, border-color .15s;
+    }
+    .ntl-card:hover .ntl-tech span {
+      color: var(--muted); border-color: var(--border-2);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .ntl-item { grid-template-columns: 48px 1fr; gap: 0 12px; }
+      .ntl-logo-wrap { width: 36px; height: 36px; border-radius: 8px; }
+      .ntl-logo-wrap img { width: 22px; height: 22px; }
+      .ntl-card { padding: 16px 16px; }
+      .ntl-company { font-size: 15px; }
+      .ntl-top { flex-direction: column; align-items: flex-start; }
+    }
+    /* ══════════════════════════════════
+       LANG SWITCHER
+    ══════════════════════════════════ */
+    .lang-switcher {
+      display: flex; align-items: center;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden;
+    }
+    .lang-btn {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      color: var(--faint); padding: 5px 10px;
+      border-right: 1px solid var(--border);
+      transition: color .15s, background .15s;
+      cursor: pointer;
+    }
+    .lang-btn:last-child { border-right: none; }
+    .lang-btn:hover { color: var(--text); background: var(--border); }
+    .lang-btn.active { color: var(--green); background: var(--green-dim); }
+
+    /* LinkedIn soon */
+    .linkedin-soon {
+      opacity: .45; cursor: default;
+      font-size: 13px; display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; color: var(--muted);
+    }
+    .linkedin-soon-card { cursor: default; opacity: .6; }
+    .linkedin-soon-label { font-style: italic; font-size: 11px; color: var(--faint) !important; }
   </style>
 </head>
 <body>
@@ -647,13 +887,20 @@
     <span>erwan.davydoff</span>
   </div>
   <div class="nav-links">
-    <a href="#about">À propos</a>
-    <a href="#skills">Stack</a>
-    <a href="#projects">Projets</a>
-    <a href="#experience">Parcours</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" data-i18n="nav_about">À propos</a>
+    <a href="#skills" data-i18n="nav_skills">Stack</a>
+    <a href="#projects" data-i18n="nav_projects">Projets</a>
+    <a href="#experience" data-i18n="nav_experience">Parcours</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
   </div>
-  <a href="mailto:Erwan.davydoff@gmail.com" class="nav-cta">me contacter →</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-btn active" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+    <a href="mailto:Erwan.davydoff@gmail.com" class="nav-cta" data-i18n="nav_cta">me contacter →</a>
+  </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
 </nav>
 
@@ -674,7 +921,7 @@
   <div class="hero-inner">
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      Disponible · Recherche Stage Cybersécurité
+      <span data-i18n="hero_badge">Disponible · Recherche Stage Cybersécurité</span>
     </div>
     <h1 class="hero-name">
       <span>Erwan</span>
@@ -753,28 +1000,10 @@
           <a href="mailto:Erwan.davydoff@gmail.com" class="quick-link"><i class="fa-regular fa-envelope"></i>Erwan.davydoff@gmail.com</a>
           <a href="tel:0664495729" class="quick-link"><i class="fa-solid fa-phone"></i>06 64 49 57 29</a>
           <a href="https://github.com/erwandavydoff-spec" target="_blank" rel="noopener" class="quick-link"><i class="fa-brands fa-github"></i>GitHub</a>
+          <span class="quick-link linkedin-soon" title="Bientôt disponible"><i class="fa-brands fa-linkedin"></i><span data-i18n="linkedin_soon">LinkedIn — bientôt</span></span>
         </div>
       </div>
-      <div class="about-right reveal-right">
-        <div class="info-panel">
-          <div class="info-panel-header">
-            <div class="dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
-            <span class="info-panel-title">profil.json</span>
-          </div>
-          <div class="info-row"><span class="info-key">âge</span><span class="info-val green">16 ans</span></div>
-          <div class="info-row"><span class="info-key">ville</span><span class="info-val">Brunoy, 91800</span></div>
-          <div class="info-row"><span class="info-key">formation</span><span class="info-val">Bac Pro CIEL</span></div>
-          <div class="info-row"><span class="info-key">lycée</span><span class="info-val">G. Brassens, Évry</span></div>
-          <div class="info-row"><span class="info-key">statut</span><span class="info-val green">STAGE OUVERT</span></div>
-          <div class="info-row"><span class="info-key">dispo</span><span class="info-val">Île-de-France / remote</span></div>
-          <div class="info-row"><span class="info-key">stages</span><span class="info-val blue">2 réalisés</span></div>
-          <div class="info-row"><span class="info-key">anglais</span><span class="info-val">B1</span></div>
-          <div class="info-row"><span class="info-key">espagnol</span><span class="info-val">A2</span></div>
-          <div class="info-row"><span class="info-key">judo</span><span class="info-val">12 ans · ceinture marron</span></div>
-          <div class="info-row"><span class="info-key">karaté</span><span class="info-val amber">1er Dan</span></div>
-          <div class="info-row"><span class="info-key">github</span><span class="info-val blue">erwandavydoff-spec</span></div>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1002,76 +1231,193 @@
 <!-- PARCOURS -->
 <section id="experience" class="section">
   <div class="inner">
-    <div class="sec-label reveal"><span class="sec-label-num">04</span><span>//</span><span>Stages réalisés</span></div>
+    <div class="sec-label reveal"><span class="sec-label-num">04</span><span>//</span><span>Formations & Parcours</span></div>
     <h2 class="sec-title reveal">Du concret,<br><em>en conditions réelles.</em></h2>
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <div class="tl-line"><div class="tl-dot"></div></div>
-        <div class="tl-body">
-          <div class="tl-header">
-            <div><h3 class="tl-company">VINCI ÉNERGIES</h3><span class="tl-role">Technicien Réseaux & Cybersécurité</span></div>
-            <div class="tl-right"><span class="tl-date">2025 – 2026</span><span class="tl-badge">Stage · Première</span></div>
+
+    <!-- TIMELINE UNIFIÉE -->
+    <div class="new-timeline">
+
+      <!-- VINCI ÉNERGIES -->
+      <div class="ntl-item reveal">
+        <div class="ntl-aside">
+          <div class="ntl-logo-wrap">
+            <a href="https://www.vinci-energies.com" target="_blank" rel="noopener" title="VINCI ÉNERGIES">
+              <img src="https://logo.clearbit.com/vinci-energies.com" alt="VINCI ÉNERGIES"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="ntl-logo-fallback" style="display:none"><i class="fa-solid fa-bolt" style="color:#f5a623"></i></span>
+            </a>
           </div>
-          <ul class="tl-missions">
-            <li>Configuration et administration de pare-feux <strong>FortiGate</strong> et de la solution cloud <strong>Zscaler</strong></li>
-            <li>Participation à un projet de <strong>migration complète d'infrastructure réseau</strong> en production</li>
-            <li>Développement d'un <strong>script Python API FortiManager</strong> pour automatiser 847 règles pare-feu</li>
-            <li>Administration Linux, segmentation VLAN, gestion des politiques de sécurité</li>
-            <li>Analyse de trafic avec Wireshark et rédaction de documentation technique complète</li>
+          <div class="ntl-line-seg"></div>
+        </div>
+        <div class="ntl-card ntl-current">
+          <div class="ntl-top">
+            <div class="ntl-meta">
+              <span class="ntl-badge-current"><span class="ntl-pulse"></span>En cours</span>
+              <span class="ntl-type">Stage · Première</span>
+            </div>
+            <span class="ntl-period">2025 – 2026</span>
+          </div>
+          <div class="ntl-company-row">
+            <a href="https://www.vinci-energies.com" target="_blank" rel="noopener" class="ntl-company-link">
+              <h3 class="ntl-company">VINCI ÉNERGIES</h3>
+              <i class="fa-solid fa-arrow-up-right ntl-ext-icon"></i>
+            </a>
+          </div>
+          <p class="ntl-role">Technicien Réseaux & Cybersécurité</p>
+          <ul class="ntl-missions">
+            <li>Configuration de pare-feux <strong>FortiGate</strong> et de la solution cloud <strong>Zscaler</strong> en production</li>
+            <li>Script Python via <strong>API FortiManager</strong> — migration de 847 règles pare-feu automatisée</li>
+            <li>Migration complète d'infrastructure réseau, segmentation VLAN, politiques de sécurité</li>
+            <li>Analyse de trafic Wireshark · administration Linux · documentation technique</li>
           </ul>
-          <div class="tl-tech"><span>FortiGate</span><span>Zscaler</span><span>Python</span><span>API FortiManager</span><span>Linux</span><span>VMware</span><span>Wireshark</span></div>
+          <div class="ntl-tech">
+            <span>FortiGate</span><span>Zscaler</span><span>Python</span><span>API FortiManager</span><span>Linux</span><span>Wireshark</span>
+          </div>
         </div>
       </div>
-      <div class="tl-item reveal">
-        <div class="tl-line"><div class="tl-dot"></div></div>
-        <div class="tl-body">
-          <div class="tl-header">
-            <div><h3 class="tl-company">NTI NAKO</h3><span class="tl-role">Support Informatique & Initiation Cybersécurité</span></div>
-            <div class="tl-right"><span class="tl-date">Sept / Oct 2025</span><span class="tl-badge">Stage · Première</span></div>
+
+      <!-- NTI NAKO -->
+      <div class="ntl-item reveal">
+        <div class="ntl-aside">
+          <div class="ntl-logo-wrap">
+            <a href="https://nti-nako.com" target="_blank" rel="noopener" title="NTI NAKO">
+              <img src="https://logo.clearbit.com/nti-nako.com" alt="NTI NAKO"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="ntl-logo-fallback" style="display:none"><i class="fa-solid fa-computer" style="color:#58a6ff"></i></span>
+            </a>
           </div>
-          <ul class="tl-missions">
-            <li>Prise en main approfondie de <strong>Linux</strong> : terminal, permissions, arborescence système</li>
-            <li><strong>OSINT & dorking</strong> : collecte d'informations publiques et reconnaissance passive</li>
-            <li>Montage, démontage et diagnostic hardware sur postes informatiques</li>
-            <li>Création de <strong>machines virtuelles</strong> sous VirtualBox et VMware</li>
-            <li>Initiation réseaux : modèle OSI, trames Wireshark, scan Nmap</li>
+          <div class="ntl-line-seg"></div>
+        </div>
+        <div class="ntl-card">
+          <div class="ntl-top">
+            <div class="ntl-meta">
+              <span class="ntl-badge-done">Terminé</span>
+              <span class="ntl-type">Stage · Première</span>
+            </div>
+            <span class="ntl-period">Sept – Oct 2025</span>
+          </div>
+          <div class="ntl-company-row">
+            <a href="https://nti-nako.com" target="_blank" rel="noopener" class="ntl-company-link">
+              <h3 class="ntl-company">NTI NAKO</h3>
+              <i class="fa-solid fa-arrow-up-right ntl-ext-icon"></i>
+            </a>
+          </div>
+          <p class="ntl-role">Support Informatique & Initiation Cybersécurité</p>
+          <ul class="ntl-missions">
+            <li>Linux approfondi : terminal, permissions, arborescence système</li>
+            <li><strong>OSINT & dorking</strong> — collecte d'informations et reconnaissance passive</li>
+            <li>Virtualisation VirtualBox / VMware · diagnostic hardware · scan Nmap</li>
           </ul>
-          <div class="tl-tech"><span>Linux</span><span>VirtualBox</span><span>VMware</span><span>Wireshark</span><span>Nmap</span><span>OSINT</span></div>
+          <div class="ntl-tech">
+            <span>Linux</span><span>VirtualBox</span><span>VMware</span><span>Nmap</span><span>OSINT</span>
+          </div>
         </div>
       </div>
-      <div class="tl-item reveal">
-        <div class="tl-line"><div class="tl-dot"></div></div>
-        <div class="tl-body">
-          <div class="tl-header">
-            <div><h3 class="tl-company">ETP ELEC</h3><span class="tl-role">Technicien Électricité & Systèmes Énergétiques</span></div>
-            <div class="tl-right"><span class="tl-date">Janv / Févr & Juin 2025</span><span class="tl-badge">Stage · Seconde</span></div>
+
+      <!-- ETP ELEC -->
+      <div class="ntl-item reveal">
+        <div class="ntl-aside">
+          <div class="ntl-logo-wrap">
+            <a href="https://www.etpelec.fr" target="_blank" rel="noopener" title="ETP ELEC">
+              <img src="https://logo.clearbit.com/etpelec.fr" alt="ETP ELEC"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="ntl-logo-fallback" style="display:none"><i class="fa-solid fa-plug-circle-bolt" style="color:#d29922"></i></span>
+            </a>
           </div>
-          <ul class="tl-missions">
-            <li>Installation et maintenance de systèmes électriques, chauffage et climatisation</li>
+          <div class="ntl-line-seg ntl-line-last"></div>
+        </div>
+        <div class="ntl-card">
+          <div class="ntl-top">
+            <div class="ntl-meta">
+              <span class="ntl-badge-done">Terminé</span>
+              <span class="ntl-type">Stage · Seconde</span>
+            </div>
+            <span class="ntl-period">Janv – Juin 2025</span>
+          </div>
+          <div class="ntl-company-row">
+            <a href="https://www.etpelec.fr" target="_blank" rel="noopener" class="ntl-company-link">
+              <h3 class="ntl-company">ETP ELEC</h3>
+              <i class="fa-solid fa-arrow-up-right ntl-ext-icon"></i>
+            </a>
+          </div>
+          <p class="ntl-role">Technicien Électricité & Systèmes Énergétiques</p>
+          <ul class="ntl-missions">
             <li>Câblage, raccordements et mise en service sur chantier</li>
-            <li>Maintenance de pompes à chaleur et <strong>bornes de recharge véhicules électriques</strong></li>
-            <li>Application des normes NFC 15-100 sur sites industriels et résidentiels</li>
+            <li>Maintenance de pompes à chaleur et <strong>bornes de recharge VE</strong></li>
+            <li>Normes NFC 15-100 — sites industriels et résidentiels</li>
           </ul>
-          <div class="tl-tech"><span>Électricité</span><span>Climatisation</span><span>Câblage</span><span>Bornes VE</span><span>NFC 15-100</span></div>
+          <div class="ntl-tech">
+            <span>Électricité</span><span>Climatisation</span><span>Câblage</span><span>Bornes VE</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="sec-label reveal" style="margin-bottom:1.8rem;"><span class="sec-label-num">05</span><span>//</span><span>Formation</span></div>
-    <div class="edu-grid stagger">
-      <div class="edu-card active">
-        <span class="edu-status">En cours</span>
-        <div class="edu-years">2025 – 2027</div>
-        <h3>Bac Pro CIEL</h3>
-        <p>Cybersécurité, Informatique & Réseaux, Électronique — formation axée sur les infrastructures réseaux, la sécurité et les systèmes embarqués.</p>
-        <span class="edu-school">Lycée Georges Brassens · Évry-Courcouronnes (91)</span>
+
+      <!-- LYCÉE GEORGES BRASSENS -->
+      <div class="ntl-item reveal">
+        <div class="ntl-aside">
+          <div class="ntl-logo-wrap">
+            <a href="https://lycee-brassens-evry.fr" target="_blank" rel="noopener" title="Lycée Georges Brassens">
+              <img src="https://logo.clearbit.com/lycee-brassens-evry.fr" alt="Lycée G. Brassens"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="ntl-logo-fallback" style="display:none"><i class="fa-solid fa-school" style="color:#3fb950"></i></span>
+            </a>
+          </div>
+          <div class="ntl-line-seg ntl-line-edu"></div>
+        </div>
+        <div class="ntl-card ntl-edu ntl-current">
+          <div class="ntl-top">
+            <div class="ntl-meta">
+              <span class="ntl-badge-current"><span class="ntl-pulse"></span>En cours</span>
+              <span class="ntl-type">Formation · Bac Pro</span>
+            </div>
+            <span class="ntl-period">2025 – 2027</span>
+          </div>
+          <div class="ntl-company-row">
+            <a href="https://lycee-brassens-evry.fr" target="_blank" rel="noopener" class="ntl-company-link">
+              <h3 class="ntl-company">Lycée Georges Brassens <span style="color:var(--muted);font-size:.7em">· Évry-Courcouronnes</span></h3>
+              <i class="fa-solid fa-arrow-up-right ntl-ext-icon"></i>
+            </a>
+          </div>
+          <p class="ntl-role">Bac Pro CIEL — Cybersécurité, Informatique & Réseaux, Électronique</p>
+          <ul class="ntl-missions">
+            <li>Infrastructures réseaux, sécurité des systèmes, systèmes embarqués</li>
+            <li>Formation professionnelle alternant cours et périodes en entreprise</li>
+          </ul>
+        </div>
       </div>
-      <div class="edu-card">
-        <span class="edu-status done">Diplômé</span>
-        <div class="edu-years">2024 – 2025</div>
-        <h3>Seconde Pro TNE</h3>
-        <p>Transition Numérique et Énergétique — systèmes numériques, installations électriques et programmation professionnelle.</p>
-        <span class="edu-school">Lycée Frère Moreau · Boussy-Saint-Antoine (91)</span>
+
+      <!-- LYCÉE FRÈRE MOREAU -->
+      <div class="ntl-item reveal">
+        <div class="ntl-aside">
+          <div class="ntl-logo-wrap">
+            <a href="https://www.lycee-moreau.fr" target="_blank" rel="noopener" title="Lycée Frère Moreau">
+              <img src="https://logo.clearbit.com/lycee-moreau.fr" alt="Lycée Frère Moreau"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="ntl-logo-fallback" style="display:none"><i class="fa-solid fa-school" style="color:#8b949e"></i></span>
+            </a>
+          </div>
+        </div>
+        <div class="ntl-card ntl-edu">
+          <div class="ntl-top">
+            <div class="ntl-meta">
+              <span class="ntl-badge-done">Diplômé</span>
+              <span class="ntl-type">Formation · Seconde Pro</span>
+            </div>
+            <span class="ntl-period">2024 – 2025</span>
+          </div>
+          <div class="ntl-company-row">
+            <a href="https://www.lycee-moreau.fr" target="_blank" rel="noopener" class="ntl-company-link">
+              <h3 class="ntl-company">Lycée Frère Moreau <span style="color:var(--muted);font-size:.7em">· Boussy-Saint-Antoine</span></h3>
+              <i class="fa-solid fa-arrow-up-right ntl-ext-icon"></i>
+            </a>
+          </div>
+          <p class="ntl-role">Seconde Pro TNE — Transition Numérique & Énergétique</p>
+          <ul class="ntl-missions">
+            <li>Systèmes numériques, installations électriques, programmation professionnelle</li>
+          </ul>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1100,6 +1446,11 @@
             <div class="c-info"><span class="c-label">GitHub</span><span class="c-val">erwandavydoff-spec</span></div>
             <span class="c-arrow"><i class="fa-solid fa-arrow-up-right"></i></span>
           </a>
+          <div class="c-link linkedin-soon-card" title="Bientôt disponible">
+            <div class="c-ico" style="opacity:.4"><i class="fa-brands fa-linkedin"></i></div>
+            <div class="c-info"><span class="c-label" style="opacity:.4">LinkedIn</span><span class="c-val linkedin-soon-label" data-i18n="linkedin_soon">Bientôt disponible</span></div>
+            <span class="c-arrow" style="opacity:.3"><i class="fa-solid fa-clock"></i></span>
+          </div>
           <a href="CV_Professionnel_Simple_Beige_et_Noir-2.pdf" download class="c-link">
             <div class="c-ico"><i class="fa-solid fa-file-arrow-down"></i></div>
             <div class="c-info"><span class="c-label">Télécharger le CV</span><span class="c-val">Format PDF</span></div>
@@ -1392,8 +1743,140 @@ document.addEventListener('keydown', e => {
 });
 
 /* ════════════════════════════════
-   CONTACT FORM
+   INTERNATIONALISATION (FR / EN / ES)
 ════════════════════════════════ */
+const i18n = {
+  fr: {
+    nav_about: 'À propos', nav_skills: 'Stack', nav_projects: 'Projets',
+    nav_experience: 'Parcours', nav_contact: 'Contact', nav_cta: 'me contacter →',
+    hero_badge: 'Disponible · Recherche Stage Cybersécurité',
+    linkedin_soon: 'LinkedIn — bientôt disponible',
+    sec_about: 'À propos', sec_skills: 'Stack technique', sec_projects: 'Projets',
+    sec_experience: 'Formations & Parcours', sec_contact: 'Contact',
+    about_title: 'Un profil atypique,', about_title_em: 'des compétences concrètes.',
+    about_p1: 'Bonjour, je suis <strong>Erwan Davydoff</strong>, 16 ans, basé à Brunoy (91800). Actuellement en première année de Bac Pro <strong>CIEL</strong> — Cybersécurité, Informatique & Réseaux, Électronique — au Lycée Georges Brassens d\'Évry-Courcouronnes.',
+    about_p2: 'Mon parcours est ancré dans le terrain : j\'ai configuré des <strong>pare-feux FortiGate</strong>, participé à une migration d\'infrastructure complète chez <strong>VINCI ÉNERGIES</strong>, et développé un script <strong>Python via l\'API FortiManager</strong> qui a automatisé la migration de 847 règles, réduisant plusieurs jours de travail manuel à quelques heures.',
+    about_p3: 'Je monte également des <strong>labs pentest</strong> personnels sous Kali Linux — VMs Metasploitable et DVWA — pour pratiquer les techniques OWASP Top 10 : injection SQL, XSS, bruteforce. L\'apprentissage en autonomie, c\'est ce qui me définit.',
+    about_p4: 'En dehors de l\'informatique, je pratique le <strong>judo</strong> depuis 12 ans (ceinture marron) et le <strong>karaté</strong> depuis 8 ans (ceinture noire 1er Dan). Les arts martiaux m\'ont appris la méthode, la patience et l\'adaptation sous pression.',
+    skills_title: 'Outils maîtrisés', skills_title_em: 'et ceux que j\'apprends.',
+    projects_title: 'Ce que j\'ai construit', projects_title_em: 'concrètement.',
+    experience_title: 'Du concret,', experience_title_em: 'en conditions réelles.',
+    contact_title: 'Travaillons', contact_title_em: 'ensemble.',
+    contact_desc: 'Je recherche un stage en <strong>cybersécurité</strong> ou <strong>administration réseaux</strong>. Disponible en Île-de-France et en remote, avec une réponse garantie sous 24h.',
+    footer_status: 'erwan.davydoff — disponible pour un stage',
+    hero_lead: 'Étudiant <strong>Bac Pro CIEL</strong> au Lycée Georges Brassens, Évry. J\'ai configuré des FortiGate, migré <strong>847 règles pare-feu</strong> via l\'API FortiManager et monté des labs pentest complets — du travail réel, pas des exercices scolaires.',
+    btn_parcours: 'Voir mon parcours', btn_contact: 'Me contacter',
+    stat_stages: 'Stages réalisés', stat_regles: 'Règles migrées', stat_judo: 'Ans de judo', stat_kara: 'Dan Karaté',
+  },
+  en: {
+    nav_about: 'About', nav_skills: 'Stack', nav_projects: 'Projects',
+    nav_experience: 'Journey', nav_contact: 'Contact', nav_cta: 'contact me →',
+    hero_badge: 'Available · Looking for Cybersecurity Internship',
+    linkedin_soon: 'LinkedIn — coming soon',
+    sec_about: 'About', sec_skills: 'Tech Stack', sec_projects: 'Projects',
+    sec_experience: 'Education & Experience', sec_contact: 'Contact',
+    about_title: 'An atypical profile,', about_title_em: 'real-world skills.',
+    about_p1: 'Hi, I\'m <strong>Erwan Davydoff</strong>, 16, based in Brunoy (91800). Currently in my first year of a vocational Bac Pro <strong>CIEL</strong> — Cybersecurity, IT & Networks, Electronics — at Lycée Georges Brassens, Évry.',
+    about_p2: 'My experience is hands-on: I\'ve configured <strong>FortiGate firewalls</strong>, taken part in a full infrastructure migration at <strong>VINCI ÉNERGIES</strong>, and built a <strong>Python script via the FortiManager API</strong> that automated the migration of 847 rules — turning days of manual work into a few hours.',
+    about_p3: 'I also run personal <strong>pentest labs</strong> on Kali Linux — Metasploitable and DVWA VMs — to practice OWASP Top 10 techniques: SQL injection, XSS, bruteforce. Self-directed learning is what defines me.',
+    about_p4: 'Outside tech, I\'ve been doing <strong>judo</strong> for 12 years (brown belt) and <strong>karate</strong> for 8 years (black belt 1st Dan). Martial arts taught me discipline, patience, and performing under pressure.',
+    skills_title: 'Tools I master,', skills_title_em: 'and those I\'m learning.',
+    projects_title: 'What I\'ve built,', projects_title_em: 'concretely.',
+    experience_title: 'Real work,', experience_title_em: 'in real conditions.',
+    contact_title: 'Let\'s work', contact_title_em: 'together.',
+    contact_desc: 'I\'m looking for an internship in <strong>cybersecurity</strong> or <strong>network administration</strong>. Available in Île-de-France and remote, with a reply guaranteed within 24h.',
+    footer_status: 'erwan.davydoff — open to internship',
+    hero_lead: 'Bac Pro <strong>CIEL</strong> student at Lycée Georges Brassens, Évry. I\'ve configured FortiGate firewalls, migrated <strong>847 firewall rules</strong> via the FortiManager API and built full pentest labs — real work, not school exercises.',
+    btn_parcours: 'View my journey', btn_contact: 'Contact me',
+    stat_stages: 'Internships done', stat_regles: 'Rules migrated', stat_judo: 'Years of judo', stat_kara: 'Dan Karate',
+  },
+  es: {
+    nav_about: 'Sobre mí', nav_skills: 'Stack', nav_projects: 'Proyectos',
+    nav_experience: 'Trayectoria', nav_contact: 'Contacto', nav_cta: 'contactarme →',
+    hero_badge: 'Disponible · Buscando Prácticas en Ciberseguridad',
+    linkedin_soon: 'LinkedIn — próximamente',
+    sec_about: 'Sobre mí', sec_skills: 'Stack técnico', sec_projects: 'Proyectos',
+    sec_experience: 'Formación & Trayectoria', sec_contact: 'Contacto',
+    about_title: 'Un perfil atípico,', about_title_em: 'competencias concretas.',
+    about_p1: 'Hola, soy <strong>Erwan Davydoff</strong>, 16 años, basado en Brunoy (91800). Actualmente en primer año de Bac Pro <strong>CIEL</strong> — Ciberseguridad, Informática & Redes, Electrónica — en el Lycée Georges Brassens de Évry.',
+    about_p2: 'Mi trayectoria es práctica: he configurado <strong>cortafuegos FortiGate</strong>, participado en una migración completa de infraestructura en <strong>VINCI ÉNERGIES</strong>, y desarrollado un script <strong>Python vía API FortiManager</strong> que automatizó la migración de 847 reglas, reduciendo días de trabajo manual a pocas horas.',
+    about_p3: 'También monto <strong>labs de pentest</strong> personales en Kali Linux — VMs Metasploitable y DVWA — para practicar técnicas OWASP Top 10: inyección SQL, XSS, fuerza bruta. El aprendizaje autónomo me define.',
+    about_p4: 'Fuera de la informática, practico <strong>judo</strong> desde hace 12 años (cinturón marrón) y <strong>kárate</strong> desde hace 8 años (cinturón negro 1er Dan). Las artes marciales me enseñaron método, paciencia y adaptación bajo presión.',
+    skills_title: 'Herramientas que domino,', skills_title_em: 'y las que aprendo.',
+    projects_title: 'Lo que he construido,', projects_title_em: 'concretamente.',
+    experience_title: 'Experiencia real,', experience_title_em: 'en condiciones reales.',
+    contact_title: 'Trabajemos', contact_title_em: 'juntos.',
+    contact_desc: 'Busco prácticas en <strong>ciberseguridad</strong> o <strong>administración de redes</strong>. Disponible en Île-de-France y en remoto, con respuesta garantizada en 24h.',
+    footer_status: 'erwan.davydoff — disponible para prácticas',
+    hero_lead: 'Estudiante de Bac Pro <strong>CIEL</strong> en el Lycée Georges Brassens, Évry. He configurado FortiGate, migrado <strong>847 reglas de cortafuegos</strong> vía API FortiManager y montado labs de pentest completos — trabajo real, no ejercicios escolares.',
+    btn_parcours: 'Ver mi trayectoria', btn_contact: 'Contactarme',
+    stat_stages: 'Prácticas realizadas', stat_regles: 'Reglas migradas', stat_judo: 'Años de judo', stat_kara: 'Dan Kárate',
+  }
+};
+
+let currentLang = 'fr';
+
+function applyLang(lang) {
+  const t = i18n[lang];
+  if (!t) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // Simple [data-i18n] elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // About section paragraphs
+  const aboutPs = document.querySelectorAll('.about-body p');
+  if (aboutPs[0]) aboutPs[0].innerHTML = t.about_p1;
+  if (aboutPs[1]) aboutPs[1].innerHTML = t.about_p2;
+  if (aboutPs[2]) aboutPs[2].innerHTML = t.about_p3;
+  if (aboutPs[3]) aboutPs[3].innerHTML = t.about_p4;
+
+  // Hero lead
+  const heroLead = document.querySelector('.hero-lead');
+  if (heroLead) heroLead.innerHTML = t.hero_lead;
+
+  // Hero actions
+  const heroBtns = document.querySelectorAll('.hero-actions a');
+  if (heroBtns[0]) heroBtns[0].innerHTML = '<i class="fa-solid fa-arrow-down"></i>' + t.btn_parcours;
+  if (heroBtns[1]) heroBtns[1].innerHTML = '<i class="fa-regular fa-envelope"></i>' + t.btn_contact;
+
+  // Hero stats labels
+  const statLabels = document.querySelectorAll('.stat-l');
+  const statKeys = ['stat_stages','stat_regles','stat_judo','stat_kara'];
+  statLabels.forEach((el,i) => { if (t[statKeys[i]]) el.textContent = t[statKeys[i]]; });
+
+  // Contact desc
+  const cdesc = document.querySelector('.contact-desc');
+  if (cdesc) cdesc.innerHTML = t.contact_desc;
+
+  // Footer status
+  const ftSpan = document.querySelector('.footer-inner span:first-child');
+  if (ftSpan) ftSpan.innerHTML = '<span class="ft-dot"></span>' + t.footer_status;
+
+  // Section labels (sec-label spans)
+  const secLabels = document.querySelectorAll('.sec-label');
+  const secMap = [
+    [t.sec_about],[t.sec_skills],[t.sec_projects],[t.sec_experience],[null],[t.sec_contact]
+  ];
+  secLabels.forEach((el, i) => {
+    if (secMap[i] && secMap[i][0]) {
+      const spans = el.querySelectorAll('span');
+      if (spans[2]) spans[2].textContent = secMap[i][0];
+    }
+  });
+
+  // Active btn
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
 (function(){
   const nameEl=document.getElementById('f-name'), emailEl=document.getElementById('f-email');
   const subjectEl=document.getElementById('f-subject'), msgEl=document.getElementById('f-message');
