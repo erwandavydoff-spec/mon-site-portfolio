@@ -11,6 +11,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/main.0ac9b6b6.css">
 
+    <!-- ===== EARLY THEME (avoid flash) ===== -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('site-theme');
+                var theme = (saved === 'light' || saved === 'dark')
+                    ? saved
+                    : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+
     <style>
         /* ============================================================
            RESET & BASE
@@ -730,6 +746,260 @@
         #contact-email-link:hover {
             color: #fff;
         }
+
+        /* ============================================================
+           THEME SYSTEM — Light / Dark (additions only)
+           Default = dark (unchanged). Light = html[data-theme="light"].
+        ============================================================ */
+        :root {
+            --theme-transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                filter 0.3s ease;
+        }
+
+        body,
+        #menu, #menu ul li a,
+        #nom, #titre,
+        section h2, .comp_div h3, .comp_img figcaption, .comp_img figure img,
+        #desc, #a_propos img,
+        #comp, .projet_box, #experience, #exp_titre, #exp_titre h5, #exp_titre h5 a,
+        #exp_titre h6, #experience p, #exp_text p, #exp_titre a img,
+        .droite1 h3, .droite1 p, .bas a, .bas img,
+        #contact_lien img, #contact_lien figcaption,
+        .contact-btn, .contact-btn svg, #contact-email-link,
+        footer,
+        #lang-switcher, .lang-btn {
+            transition: var(--theme-transition);
+        }
+
+        /* ─── LIGHT OVERRIDES ─── */
+        html[data-theme="light"] body {
+            background-color: #f5f4f0;
+            color: #1f1f1f;
+        }
+
+        html[data-theme="light"] #menu {
+            background: rgba(245, 244, 240, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        html[data-theme="light"] #menu ul li a       { color: #444; }
+        html[data-theme="light"] #menu ul li a:hover { color: #000; }
+
+        html[data-theme="light"] #nom {
+            color: #0d0d0d;
+            text-shadow: 0 2px 30px rgba(255,255,255,0.55);
+        }
+        html[data-theme="light"] #titre { color: rgba(0,0,0,0.62); }
+
+        html[data-theme="light"] section h2 { color: #0d0d0d; }
+        html[data-theme="light"] section h2::after {
+            background: linear-gradient(90deg, rgba(0,0,0,0.28), transparent);
+        }
+
+        html[data-theme="light"] #desc        { color: #2a2a2a; }
+        html[data-theme="light"] #a_propos img{ border-color: rgba(0,0,0,0.12); }
+
+        html[data-theme="light"] #comp { background: rgba(0,0,0,0.025); }
+        html[data-theme="light"] .comp_div h3 {
+            color: #555;
+            border-left-color: rgba(0,0,0,0.28);
+        }
+        html[data-theme="light"] .comp_img figcaption { color: #555; }
+        html[data-theme="light"] .comp_img figure img {
+            filter: brightness(0.95) invert(0);
+        }
+        html[data-theme="light"] .comp_img figure:hover img {
+            filter: brightness(1) invert(0);
+        }
+        html[data-theme="light"] .comp_div:hover {
+            box-shadow:
+                0 0 28px rgba(60,60,120,0.08),
+                0 0 60px rgba(60,60,120,0.04),
+                inset 0 0 20px rgba(0,0,0,0.02);
+        }
+        html[data-theme="light"] .comp_img figure::after {
+            background: radial-gradient(ellipse at center, rgba(60,60,140,0.13) 0%, transparent 70%);
+        }
+
+        html[data-theme="light"] .projet_box {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.08);
+        }
+        html[data-theme="light"] .projet_box:hover {
+            border-color: rgba(0,0,0,0.15);
+            box-shadow:
+                0 0 40px rgba(60,60,140,0.07),
+                0 6px 30px rgba(0,0,0,0.07);
+        }
+        html[data-theme="light"] .droite1 h3 { color: #0d0d0d; }
+        html[data-theme="light"] .droite1 p  { color: #3a3a3a; }
+        html[data-theme="light"] .bas a       { color: #444; }
+        html[data-theme="light"] .bas a:hover { color: #000; }
+        html[data-theme="light"] .bas img {
+            filter: invert(0) brightness(0.45);
+        }
+        html[data-theme="light"] .bas a:hover img {
+            filter: invert(0) brightness(0.15);
+        }
+
+        html[data-theme="light"] #experience {
+            background: rgba(0,0,0,0.025);
+            border-color: rgba(0,0,0,0.08);
+        }
+        html[data-theme="light"] #experience:hover {
+            border-color: rgba(0,0,0,0.15);
+            box-shadow:
+                0 0 32px rgba(60,60,140,0.08),
+                0 0 70px rgba(60,60,140,0.04);
+        }
+        html[data-theme="light"] #exp_titre { border-bottom-color: rgba(0,0,0,0.1); }
+        html[data-theme="light"] #exp_titre h5,
+        html[data-theme="light"] #exp_titre h5 a { color: #0d0d0d; }
+        html[data-theme="light"] #exp_titre h6   { color: #666; }
+        html[data-theme="light"] #experience p,
+        html[data-theme="light"] #exp_text p      { color: #3a3a3a; }
+        html[data-theme="light"] #exp_titre a img {
+            filter: brightness(0.95) invert(0);
+        }
+        html[data-theme="light"] #exp_titre a:hover img {
+            filter: brightness(1) invert(0);
+        }
+
+        html[data-theme="light"] #contact_lien img {
+            filter: invert(0) brightness(0.4);
+        }
+        html[data-theme="light"] #contact_lien figure:hover img {
+            filter: invert(0) brightness(0.15);
+        }
+        html[data-theme="light"] #contact_lien figcaption { color: #555; }
+
+        html[data-theme="light"] .contact-btn {
+            background: rgba(0,0,0,0.04);
+            color: #2a2a2a;
+            border-color: rgba(0,0,0,0.18);
+        }
+        html[data-theme="light"] .contact-btn:hover {
+            background: rgba(0,0,0,0.09);
+            color: #000;
+            border-color: rgba(0,0,0,0.4);
+        }
+        html[data-theme="light"] #contact-email-link        { color: #555; }
+        html[data-theme="light"] #contact-email-link:hover  { color: #000; }
+
+        html[data-theme="light"] footer {
+            border-top-color: rgba(0,0,0,0.08);
+            color: #777;
+        }
+
+        html[data-theme="light"] #lang-switcher {
+            background: rgba(255,255,255,0.6);
+            border-color: rgba(0,0,0,0.1);
+        }
+        html[data-theme="light"] .lang-btn          { color: rgba(0,0,0,0.55); }
+        html[data-theme="light"] .lang-btn:hover {
+            background: rgba(0,0,0,0.06);
+            color: rgba(0,0,0,0.85);
+        }
+        html[data-theme="light"] .lang-btn.active {
+            background: rgba(0,0,0,0.14);
+            color: #000;
+        }
+
+        /* ============================================================
+           THEME TOGGLE — "LIGHT  [ ○ ]  DARK" (bottom of site)
+        ============================================================ */
+        #theme-toggle-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 2.5rem 1rem 1.2rem;
+            user-select: none;
+        }
+
+        #theme-toggle-wrap .tt-label {
+            font-family: 'Sulphur Point', sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Default (dark) → DARK label active, LIGHT dimmed */
+        #theme-toggle-wrap .tt-label[data-pos="dark"]  { color: #ffffff; }
+        #theme-toggle-wrap .tt-label[data-pos="light"] { color: rgba(255,255,255,0.4); }
+
+        /* Light theme → invert */
+        html[data-theme="light"] #theme-toggle-wrap .tt-label[data-pos="light"] { color: #0d0d0d; }
+        html[data-theme="light"] #theme-toggle-wrap .tt-label[data-pos="dark"]  { color: rgba(0,0,0,0.38); }
+
+        #theme-toggle {
+            position: relative;
+            width: 58px;
+            height: 30px;
+            border-radius: 999px;
+            background: #2f6fff;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 6px 18px rgba(47,111,255,0.35);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            /* Default = dark → knob on the RIGHT (next to "DARK") */
+            transform: translateX(28px);
+            transition: transform 0.3s cubic-bezier(0.6, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+
+        /* Light → knob slides LEFT (next to "LIGHT") */
+        html[data-theme="light"] #theme-toggle::before {
+            transform: translateX(0);
+        }
+
+        html[data-theme="light"] #theme-toggle {
+            box-shadow:
+                0 0 0 1px rgba(0,0,0,0.06),
+                0 6px 18px rgba(47,111,255,0.4);
+        }
+
+        #theme-toggle:hover {
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.18),
+                0 8px 26px rgba(47,111,255,0.55);
+        }
+
+        #theme-toggle:focus-visible {
+            outline: 2px solid #2f6fff;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 480px) {
+            #theme-toggle-wrap {
+                gap: 0.7rem;
+                padding: 2rem 1rem 0.8rem;
+            }
+            #theme-toggle-wrap .tt-label {
+                font-size: 0.72rem;
+                letter-spacing: 0.15em;
+            }
+        }
     </style>
 </head>
 
@@ -865,7 +1135,7 @@
                
                 <div>
                     <h3 data-i18n="proj1_title" style="margin-bottom:0.8rem;">
-                        Main Robotique IA • 2025
+                        HandTrack‑ESP32 • 2025
                     </h3>
 
                     <p data-i18n-html="proj1_p1"></p>
@@ -955,7 +1225,7 @@
                 </svg>
                 Appeler
             </a>
-            <a class="contact-btn" href="mailto:erwan.davydoff@gmail.com">
+            <a class="contact-btn" href="/cdn-cgi/l/email-protection#b1d4c3c6d0df9fd5d0c7c8d5ded7d7f1d6dcd0d8dd9fd2dedc">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
@@ -972,8 +1242,19 @@
             </a>
         </div>
 
-        <a id="contact-email-link" href="mailto:erwan.davydoff@gmail.com">erwan.davydoff@gmail.com</a>
+        <a id="contact-email-link" href="/cdn-cgi/l/email-protection#1f7a6d687e71317b7e69667b7079795f78727e7673317c7072"><span class="__cf_email__" data-cfemail="3b5e494c5a55155f5a4d425f545d5d7b5c565a525715585456">[email&#160;protected]</span></a>
     </section>
+
+    <!-- ===== THEME TOGGLE (bottom of site) ===== -->
+    <div id="theme-toggle-wrap">
+        <span class="tt-label" data-pos="light">Light</span>
+        <button id="theme-toggle"
+                type="button"
+                role="switch"
+                aria-label="Basculer entre le mode clair et le mode sombre"
+                aria-checked="true"></button>
+        <span class="tt-label" data-pos="dark">Dark</span>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -984,7 +1265,7 @@
     </footer>
 
     <!-- PARTICLE WAVE ANIMATION -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     (function () {
         var canvas = document.getElementById('particle-wave');
         var ctx    = canvas.getContext('2d');
@@ -1063,11 +1344,19 @@
                 var alpha      = lerp(0.12, 0.82, 1 - rowFrac) * (1 + mouseInfluence * 0.4);
                 alpha = Math.min(alpha, 1);
 
-                /* couleur : blanc pur en crête, légère teinte bleue/violette ailleurs */
+                /* couleur : selon thème (blanc pur en mode sombre, encre bleutée en mode clair) */
+                var isLight = document.documentElement.getAttribute('data-theme') === 'light';
                 var waveNorm   = (waveY / WAVE_AMP + 1) * 0.5;  // 0..1
-                var r = Math.round(lerp(180, 255, waveNorm));
-                var g = Math.round(lerp(180, 255, waveNorm));
-                var b = Math.round(lerp(220, 255, waveNorm));
+                var r, g, b;
+                if (isLight) {
+                    r = Math.round(lerp(60, 25, waveNorm));
+                    g = Math.round(lerp(70, 40, waveNorm));
+                    b = Math.round(lerp(110, 70, waveNorm));
+                } else {
+                    r = Math.round(lerp(180, 255, waveNorm));
+                    g = Math.round(lerp(180, 255, waveNorm));
+                    b = Math.round(lerp(220, 255, waveNorm));
+                }
 
                 ctx.beginPath();
                 ctx.arc(px, py, size, 0, Math.PI * 2);
@@ -1281,5 +1570,49 @@
         }());
     </script>
 
+    <!-- ===== THEME TOGGLE LOGIC ===== -->
+    <script>
+        (function () {
+            var STORAGE_KEY = 'site-theme';
+            var root = document.documentElement;
+
+            function applyTheme(theme) {
+                root.setAttribute('data-theme', theme);
+                var btn = document.getElementById('theme-toggle');
+                if (btn) btn.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var btn = document.getElementById('theme-toggle');
+                if (!btn) return;
+
+                // sync aria on first paint
+                applyTheme(root.getAttribute('data-theme') || 'dark');
+
+                btn.addEventListener('click', function () {
+                    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                    var next = current === 'light' ? 'dark' : 'light';
+                    applyTheme(next);
+                    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+                });
+            });
+
+            // Follow OS preference only if the user hasn't manually chosen
+            if (window.matchMedia) {
+                var mq = window.matchMedia('(prefers-color-scheme: light)');
+                var listener = function (e) {
+                    var saved;
+                    try { saved = localStorage.getItem(STORAGE_KEY); } catch (err) { saved = null; }
+                    if (saved !== 'light' && saved !== 'dark') {
+                        applyTheme(e.matches ? 'light' : 'dark');
+                    }
+                };
+                if (mq.addEventListener) mq.addEventListener('change', listener);
+                else if (mq.addListener) mq.addListener(listener);
+            }
+        })();
+    </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
